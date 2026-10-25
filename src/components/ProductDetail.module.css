@@ -1,0 +1,33 @@
+
+.productDetail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    padding: 32px;
+    background: #f8f8f8;
+    border-radius: 12px;
+  }
+  
+  .productImage img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .productInformation h2 {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  
+  .productInformation h3 {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .productDetail {
+      grid-template-columns: 1fr;
+    }
+  }
+  
