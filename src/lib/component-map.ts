@@ -19,7 +19,8 @@ import * as RichText from 'src/components/RichText';
 import * as RowSplitter from 'src/components/RowSplitter';
 import * as SitecoreStyles from 'src/components/SitecoreStyles';
 import * as Title from 'src/components/Title';
-import * as ProductDetail from 'src/components/ProductDetail';
+import * as ProductDetail from 'src/components/ProductDetail/ProductDetail';
+import * as ContentSection from 'src/components/ContentSection/ContentSection';
 
 // Components must be registered with to match the string key with component name in Sitecore
 export const componentMap = new Map<string, NextjsJssComponent>([
@@ -42,6 +43,7 @@ export const componentMap = new Map<string, NextjsJssComponent>([
   ['SitecoreStyles', SitecoreStyles],
   ['Title', Title],
   ['ProductDetail', ProductDetail],
+  ['ContentSection', ContentSection],
 ]);
 
 export default componentMap;

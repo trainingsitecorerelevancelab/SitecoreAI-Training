@@ -1,0 +1,105 @@
+.contentSection {
+    padding: 80px 24px;
+    background-color: #ffffff;
+  }
+  
+  .lightGrey {
+    background-color: #f5f5f5;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  
+  .content {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .imageContainer {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .imageLeft .imageContainer {
+    order: 1;
+  }
+  
+  .imageLeft .content {
+    order: 2;
+  }
+  
+  .imageRight .content {
+    order: 1;
+  }
+  
+  .imageRight .imageContainer {
+    order: 2;
+  }
+  
+  .heading {
+    font-size: 38px;
+    font-weight: 700;
+    color: #222222;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+  
+  .description {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #555555;
+    margin-bottom: 28px;
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+  
+  .ctaButton {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: #c66b35;
+    color: #ffffff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ctaButton:hover {
+    background-color: #a85325;
+  }
+  
+  @media (max-width: 768px) {
+    .contentSection {
+      padding: 48px 20px;
+    }
+  
+    .container {
+      flex-direction: column;
+      gap: 32px;
+    }
+  
+    .content,
+    .imageContainer {
+      width: 100%;
+      flex: none;
+      order: initial !important;
+    }
+  
+    .heading {
+      font-size: 28px;
+    }
+  
+    .description {
+      font-size: 16px;
+    }
+  }
