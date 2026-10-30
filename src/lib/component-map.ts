@@ -21,6 +21,7 @@ import * as SitecoreStyles from 'src/components/SitecoreStyles';
 import * as Title from 'src/components/Title';
 import * as ProductDetail from 'src/components/ProductDetail/ProductDetail';
 import * as ContentSection from 'src/components/ContentSection/ContentSection';
+import * as FeaturedServices from 'src/components/FeaturedServices/FeaturedServices';
 
 // Components must be registered with to match the string key with component name in Sitecore
 export const componentMap = new Map<string, NextjsJssComponent>([
@@ -44,6 +45,7 @@ export const componentMap = new Map<string, NextjsJssComponent>([
   ['Title', Title],
   ['ProductDetail', ProductDetail],
   ['ContentSection', ContentSection],
+  ['FeaturedServices', FeaturedServices],
 ]);
 
 export default componentMap;

@@ -1,55 +1,81 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Image } from '@sitecore-content-sdk/nextjs';
 
-import { FEATURED_SERVICES_QUERY } from './FeaturedServices.graphql';
 import type { FeaturedServicesProps, FeaturedServicesResponse } from './FeaturedServices.types';
 
 import styles from './FeaturedServices.module.css';
 
-export const Default = async ({ rendering, page }: FeaturedServicesProps) => {
+export const Default = ({ rendering, page }: FeaturedServicesProps) => {
+  const [data, setData] = useState<FeaturedServicesResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const datasourceId = rendering.dataSource;
+  const language = page?.locale ?? 'en';
+
+  useEffect(() => {
+    if (!datasourceId) {
+      return;
+    }
+
+    const controller = new AbortController();
+
+    const loadServices = async () => {
+      setLoading(true);
+      setError(null);
+      setData(null);
+
+      try {
+        const response = await fetch('/api/featured-services', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            datasourceId,
+            language,
+          }),
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to load featured services: ${response.status}`);
+        }
+
+        const result: FeaturedServicesResponse = await response.json();
+
+        if (!controller.signal.aborted) {
+          setData(result);
+        }
+      } catch (err) {
+        if (!controller.signal.aborted) {
+          setError(err instanceof Error ? err.message : 'Unable to load featured services.');
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    void loadServices();
+
+    return () => controller.abort();
+  }, [datasourceId, language]);
 
   if (!datasourceId) {
     return <p>Featured Services datasource is not assigned.</p>;
   }
 
-  const endpoint = process.env.SITECORE_GRAPHQL_ENDPOINT;
-  const apiKey = process.env.SITECORE_GRAPHQL_API_KEY;
-
-  if (!endpoint || !apiKey) {
-    throw new Error('Sitecore GraphQL configuration is missing.');
+  if (loading) {
+    return <p>Loading featured services...</p>;
   }
 
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      sc_apikey: apiKey,
-    },
-    body: JSON.stringify({
-      query: FEATURED_SERVICES_QUERY,
-      variables: {
-        datasourceId,
-        language: page?.locale ?? 'en',
-      },
-    }),
-    cache: 'no-store',
-  });
-
-  if (!response.ok) {
-    throw new Error(`GraphQL request failed: ${response.status}`);
+  if (error) {
+    return <p>{error}</p>;
   }
 
-  const result: {
-    data?: FeaturedServicesResponse;
-    errors?: { message: string }[];
-  } = await response.json();
-
-  if (result.errors?.length) {
-    throw new Error(result.errors.map((error) => error.message).join('; '));
-  }
-
-  const datasource = result.data?.item;
+  const datasource = data?.item;
 
   if (!datasource) {
     return <p>Featured Services content not found.</p>;
