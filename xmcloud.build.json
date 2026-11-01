@@ -10,5 +10,12 @@
       "buildCommand": "build",
       "runCommand": "next:start"
     }
-  }
+  },
+  "authoringPath": "./authoring",
+  "transforms": [
+    {
+        "xdtPath": "/xdts/web.config.xdt",
+        "targetPath": "/web.config"
+    }
+  ]
 }
