@@ -1,32 +1,14 @@
 import React from 'react';
 import styles from './ProductDetail.module.css';
-import {
-  Text,
-  RichText,
-  Image,
-  Link,
-  type Field,
-  type ImageField,
-  type LinkField,
-} from '@sitecore-content-sdk/nextjs';
+import { Text, RichText, Link, Image } from '@sitecore-content-sdk/nextjs';
 
-interface ProductDetailFields {
-  ProductName: Field<string>;
-  Description: Field<string>;
-  Price: Field<string>;
-  ProductImage: ImageField;
-  ProductLink: LinkField;
-}
-
-interface ProductDetailProps {
-  fields?: ProductDetailFields;
-}
+import { ProductDetailProps } from './ProductDetail.types';
 
 export const Default = (props: ProductDetailProps) => {
   const fields = props.fields;
 
   if (!fields) {
-    return <div>Product datasource is not assigned.</div>;
+    return <div>Product datasource is not assigned</div>;
   }
 
   return (
@@ -41,7 +23,7 @@ export const Default = (props: ProductDetailProps) => {
         </h2>
 
         <div className={styles.productInformation}>
-          <RichText field={fields.Description} />
+          <RichText tag="span" field={fields.Description} />
         </div>
 
         <h3>

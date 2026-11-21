@@ -1,0 +1,224 @@
+.card,
+.banner,
+.horizontal {
+  color: #263238;
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid #e8e3d9;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgb(38 50 56 / 9%);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.card:hover {
+  box-shadow: 0 18px 38px rgb(38 50 56 / 15%);
+  transform: translateY(-4px);
+}
+
+.cardImage {
+  height: 250px;
+  overflow: hidden;
+  background: #e8e9e5;
+}
+
+.cardImage :global(img),
+.horizontalImage :global(img) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.card:hover .cardImage :global(img),
+.horizontal:hover .horizontalImage :global(img) {
+  transform: scale(1.035);
+}
+
+.cardContent {
+  padding: 24px 26px 28px;
+}
+
+.cardTitle,
+.horizontalTitle {
+  margin: 0;
+  color: #263238;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(22px, 2.4vw, 29px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.cardDescription,
+.horizontalDescription,
+.bannerDescription {
+  line-height: 1.7;
+}
+
+.cardDescription {
+  margin-top: 12px;
+  color: #687477;
+  font-size: 14px;
+}
+
+.banner {
+  position: relative;
+  min-height: clamp(360px, 48vw, 580px);
+  overflow: hidden;
+  border-radius: 14px;
+  background: #34433e;
+  isolation: isolate;
+}
+
+.bannerImage {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+}
+
+.bannerImage :global(img) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.banner:hover .bannerImage :global(img) {
+  transform: scale(1.025);
+}
+
+.banner::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(23 35 31 / 76%) 0%,
+    rgb(23 35 31 / 50%) 42%,
+    rgb(23 35 31 / 4%) 100%
+  );
+  content: '';
+}
+
+.bannerOverlay {
+  display: flex;
+  min-height: inherit;
+  max-width: 720px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(32px, 7vw, 84px);
+  color: #fff;
+}
+
+.bannerTitle {
+  max-width: 620px;
+  margin: 0;
+  color: inherit;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(38px, 6.5vw, 76px);
+  font-weight: 400;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.bannerDescription {
+  max-width: 520px;
+  margin-top: 20px;
+  color: rgb(255 255 255 / 90%);
+  font-size: clamp(15px, 1.6vw, 18px);
+}
+
+.horizontal {
+  display: grid;
+  min-height: 300px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  overflow: hidden;
+  border: 1px solid #e8e3d9;
+  border-radius: 12px;
+  background: #f8f7f4;
+  box-shadow: 0 10px 28px rgb(38 50 56 / 7%);
+}
+
+.horizontalImage {
+  min-height: 300px;
+  overflow: hidden;
+  background: #e8e9e5;
+}
+
+.horizontalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(28px, 5vw, 60px);
+}
+
+.horizontalContent::before {
+  width: 46px;
+  height: 2px;
+  margin-bottom: 20px;
+  background: #a17c4b;
+  content: '';
+}
+
+.horizontalTitle {
+  font-size: clamp(27px, 3.5vw, 42px);
+}
+
+.horizontalDescription {
+  margin-top: 14px;
+  color: #687477;
+  font-size: 15px;
+}
+
+@media (max-width: 680px) {
+  .cardImage {
+    height: 220px;
+  }
+
+  .cardContent {
+    padding: 20px 21px 24px;
+  }
+
+  .banner {
+    min-height: 400px;
+  }
+
+  .banner::after {
+    background: linear-gradient(0deg, rgb(23 35 31 / 82%), rgb(23 35 31 / 12%));
+  }
+
+  .bannerOverlay {
+    justify-content: flex-end;
+    padding: 28px;
+  }
+
+  .horizontal {
+    grid-template-columns: 1fr;
+  }
+
+  .horizontalImage {
+    min-height: 230px;
+    max-height: 300px;
+  }
+
+  .horizontalContent {
+    padding: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardImage :global(img),
+  .bannerImage :global(img),
+  .horizontalImage :global(img) {
+    transition: none;
+  }
+}

@@ -1,0 +1,105 @@
+.gallery {
+  padding: 48px 24px;
+}
+
+.container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.heading {
+  margin: 0 0 12px;
+}
+
+.description {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 24px;
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid #d9dedb;
+  background: #fff;
+}
+
+.imageWrapper {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f0f2f0;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardContent {
+  padding: 20px;
+}
+
+.category {
+  color: #245c43;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.projectTitle {
+  margin: 8px 0;
+}
+
+.projectDescription {
+  line-height: 1.6;
+}
+
+.metadata {
+  color: #48534c;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.viewLink,
+.interestButton {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 16px;
+}
+
+.viewLink {
+  color: #245c43;
+}
+
+.interestButton {
+  border: 0;
+  background: #245c43;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    padding: 32px 16px;
+  }
+}

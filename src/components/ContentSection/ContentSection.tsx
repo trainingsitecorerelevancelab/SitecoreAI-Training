@@ -5,7 +5,6 @@ import styles from './ContentSection.module.css';
 
 export const Default = ({ fields }: ContentSectionProps) => {
   const { sitecoreContext } = useSitecoreContext();
-
   if (!fields) {
     return <div>ContentSection datasource is not assigned.</div>;
   }
@@ -17,7 +16,7 @@ export const Default = ({ fields }: ContentSectionProps) => {
   const sectionClasses = [
     styles.contentSection,
     isImageLeft ? styles.imageLeft : styles.imageRight,
-    isLightGrey ? styles.lightGrey : '',
+    isLightGrey ? styles.lightGrey : styles.lightPink,
   ]
     .filter(Boolean)
     .join(' ');
@@ -25,12 +24,11 @@ export const Default = ({ fields }: ContentSectionProps) => {
   return (
     <section className={sectionClasses}>
       <section>
-        <h2>Falcon Interiors</h2>
-        <p>Site: {sitecoreContext.site?.name}</p>
-        <p>Language: {sitecoreContext.language}</p>
+        <p>Site: {sitecoreContext?.site?.name}</p>
+        <p>Language: {sitecoreContext?.language}</p>
         <p>
-          Editing:{' '}
-          {(sitecoreContext.mode as { isEditing?: boolean } | undefined)?.isEditing ? 'Yes' : 'No'}
+          Editing:{''}
+          {(sitecoreContext.mode as { isEditing?: boolean })?.isEditing ? 'Yes' : 'No'}
         </p>
       </section>
       <div className={styles.container}>
@@ -41,6 +39,7 @@ export const Default = ({ fields }: ContentSectionProps) => {
 
           {fields.CTA?.value?.href && <Link field={fields.CTA} className={styles.ctaButton} />}
         </div>
+
         <div className={styles.imageContainer}>
           {fields.SectionImage && <Image field={fields.SectionImage} className={styles.image} />}
         </div>

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Image } from '@sitecore-content-sdk/nextjs';
-
-import type { FeaturedServicesProps, FeaturedServicesResponse } from './FeaturedServices.types';
-
+import { Text, RichText, Image } from '@sitecore-content-sdk/nextjs';
+import type { FeaturedServicesProps, FeaturedServicesData } from './FeaturedServices.types';
 import styles from './FeaturedServices.module.css';
 
 export const Default = ({ rendering, page }: FeaturedServicesProps) => {
-  const [data, setData] = useState<FeaturedServicesResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<FeaturedServicesData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const datasourceId = rendering.dataSource;
@@ -15,6 +13,8 @@ export const Default = ({ rendering, page }: FeaturedServicesProps) => {
 
   useEffect(() => {
     if (!datasourceId) {
+      setError('No datasourceId provided');
+      setLoading(false);
       return;
     }
 
@@ -32,24 +32,28 @@ export const Default = ({ rendering, page }: FeaturedServicesProps) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            datasourceId,
-            language,
+            datasourceId: datasourceId,
+            language: language,
           }),
           signal: controller.signal,
         });
-
         if (!response.ok) {
-          throw new Error(`Failed to load featured services: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const result: FeaturedServicesResponse = await response.json();
+        const result: FeaturedServicesData = await response.json();
 
         if (!controller.signal.aborted) {
           setData(result);
         }
-      } catch (err) {
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          return;
+        }
+
+        console.error('Error fetching featured services:', error);
         if (!controller.signal.aborted) {
-          setError(err instanceof Error ? err.message : 'Unable to load featured services.');
+          setError(error instanceof Error ? error.message : 'Unable to load featured services');
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -64,24 +68,20 @@ export const Default = ({ rendering, page }: FeaturedServicesProps) => {
   }, [datasourceId, language]);
 
   if (!datasourceId) {
-    return <p>Featured Services datasource is not assigned.</p>;
+    return <div>No datasourceId provided</div>;
   }
-
   if (loading) {
-    return <p>Loading featured services...</p>;
+    return <div>Loading...</div>;
   }
-
   if (error) {
-    return <p>{error}</p>;
+    return <div>Error: {error}</div>;
   }
-
   const datasource = data?.item;
-
   if (!datasource) {
-    return <p>Featured Services content not found.</p>;
+    return <div>No data found for the provided datasourceId</div>;
   }
 
-  const services = datasource.selectedServices?.targetItems ?? [];
+  const services = datasource.ListofServices?.Services || [];
 
   return (
     <section className={styles.featuredServices}>
@@ -99,18 +99,18 @@ export const Default = ({ rendering, page }: FeaturedServicesProps) => {
                 <Image field={service.serviceImage.jsonValue} className={styles.image} />
               )}
 
-              {service.serviceName?.jsonValue && (
+              {service.name?.value && (
                 <Text
                   tag="h3"
-                  field={service.serviceName.jsonValue}
+                  field={{ value: service.name.value }}
                   className={styles.serviceName}
                 />
               )}
 
-              {service.description?.jsonValue && (
-                <Text
+              {service.description?.value && (
+                <RichText
                   tag="p"
-                  field={service.description.jsonValue}
+                  field={{ value: service.description.value }}
                   className={styles.description}
                 />
               )}

@@ -1,0 +1,59 @@
+.switcher {
+  position: fixed;
+  top: 20px;
+  right: clamp(16px, 3vw, 40px);
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px 9px 16px;
+  border: 1px solid #e4dfd4;
+  border-radius: 999px;
+  background: rgb(250 249 246 / 96%);
+  box-shadow: 0 5px 18px rgb(38 50 56 / 12%);
+  color: #68716b;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.label {
+  font-weight: 700;
+}
+
+.select {
+  min-height: 32px;
+  padding: 4px 22px 4px 10px;
+  border: 0;
+  border-left: 1px solid #e4dfd4;
+  border-radius: 0;
+  appearance: none;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='m2 4 4 4 4-4' fill='none' stroke='%23245b54' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-position: right 2px center;
+  background-repeat: no-repeat;
+  color: #245b54;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.select:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid #b49a66;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .switcher {
+    top: 12px;
+    right: 12px;
+    gap: 8px;
+    padding: 7px 10px 7px 12px;
+  }
+}

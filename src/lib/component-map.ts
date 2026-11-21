@@ -19,9 +19,17 @@ import * as RichText from 'src/components/RichText';
 import * as RowSplitter from 'src/components/RowSplitter';
 import * as SitecoreStyles from 'src/components/SitecoreStyles';
 import * as Title from 'src/components/Title';
+import * as LanguageSwitcher from 'components/LanguageSwitcher/LanguageSwitcher';
 import * as ProductDetail from 'src/components/ProductDetail/ProductDetail';
 import * as ContentSection from 'src/components/ContentSection/ContentSection';
-import * as FeaturedServices from 'src/components/FeaturedServices/FeaturedServices';
+import * as HighlightedServices from '../components/HighlightedServices/HighlightedServices';
+import * as AdvisorCarousel from 'src/components/AdvisorCarousel/AdvisorCarousel';
+import * as InteriorProjectShowcase from 'src/components/InteriorProjectShowcase/InteriorProjectShowcase';
+import * as SiteSearch from 'src/components/SiteSearch/SiteSearch';
+import * as PersonalizedProjectGallery from 'src/components/PersonalizedProjectGallery/PersonalizedProjectGallery';
+import * as InteriorProjectPage from 'src/components/InteriorProjectPage/InteriorProjectPage';
+import * as InteriorProjectSearch from 'src/components/InteriorProjectSearch/InteriorProjectSearch';
+import * as FeaturedProject from 'src/components/FeaturedInteriors/FeaturedProject';
 
 // Components must be registered with to match the string key with component name in Sitecore
 export const componentMap = new Map<string, NextjsJssComponent>([
@@ -43,9 +51,21 @@ export const componentMap = new Map<string, NextjsJssComponent>([
   ['RowSplitter', RowSplitter],
   ['SitecoreStyles', SitecoreStyles],
   ['Title', Title],
+  ['LanguageSwitcher', LanguageSwitcher],
   ['ProductDetail', ProductDetail],
   ['ContentSection', ContentSection],
-  ['FeaturedServices', FeaturedServices],
+  ['HighlightedServices', HighlightedServices],
+  ['AdvisorCarousel', AdvisorCarousel],
+  ['InteriorProjectShowcase', InteriorProjectShowcase],
+  ['SiteSearch', SiteSearch],
+  ['PersonalizedProjectGallery', PersonalizedProjectGallery],
+  ['InteriorProjectPage', InteriorProjectPage],
+  ['InteriorProjectSearch', InteriorProjectSearch],
+  ['FeaturedProject', FeaturedProject],
+  ['FeaturedProject-Default', FeaturedProject.Default],
+  ['FeaturedProject-Card', FeaturedProject.Card],
+  ['FeaturedProject-Banner', FeaturedProject.Banner],
+  ['FeaturedProject-Horizontal', FeaturedProject.Horizontal],
 ]);
 
 export default componentMap;
